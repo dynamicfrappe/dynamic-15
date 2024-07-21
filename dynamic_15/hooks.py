@@ -4,6 +4,8 @@ app_publisher = "dynamic business solutions"
 app_description = "Dynamic Css version 15"
 app_email = "beshoyatef31@gmail.com"
 app_license = "mit"
+app_logo_url = "/assets/dynamic_15/images/dynamic-logo-colors.png"
+
 # required_apps = []
 
 # Includes in <head>
