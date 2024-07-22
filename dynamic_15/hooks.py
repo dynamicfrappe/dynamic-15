@@ -37,7 +37,9 @@ website_context = {
 # page_js = {"page" : "public/js/file.js"}
 
 # include js in doctype views
-# doctype_js = {"doctype" : "public/js/doctype.js"}
+doctype_js = {
+    "Stock Entry" : "public/js/stock_entry.js"
+    }
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
 # doctype_calendar_js = {"doctype" : "public/js/doctype_calendar.js"}
@@ -77,8 +79,17 @@ website_context = {
 # ------------
 
 # before_install = "dynamic_15.install.before_install"
-# after_install = "dynamic_15.install.after_install"
+after_install = [
+    "dynamic_15.install.after_install",
+    ]
 
+after_migrate = [
+    "dynamic_15.install.after_install",
+]
+
+domains = {
+    "Tebian" : "dynamic_15.domains.tebian"
+}
 # Uninstallation
 # ------------
 
@@ -127,6 +138,11 @@ website_context = {
 # 	"ToDo": "custom_app.overrides.CustomToDo"
 # }
 
+# dynamic_15/dynamic_15/hooks.py
+override_doctype_class = {
+    "Stock Entry": "dynamic_15.override_class.stock_entry.StockEntry"
+}
+
 # Document Events
 # ---------------
 # Hook on document methods and events
@@ -171,6 +187,7 @@ website_context = {
 # override_whitelisted_methods = {
 # 	"frappe.desk.doctype.event.event.get_events": "dynamic_15.event.get_events"
 # }
+
 #
 # each overriding function accepts a `data` argument;
 # generated from the base implementation of the doctype dashboard,
