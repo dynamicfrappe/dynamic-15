@@ -4,7 +4,7 @@ app_publisher = "dynamic business solutions"
 app_description = "Dynamic Css version 15"
 app_email = "beshoyatef31@gmail.com"
 app_license = "mit"
-app_logo_url = "/assets/dynamic_15/images/dynamic-logo-colors.png"
+app_logo_url = "/assets/dynamic_15/images/erp-system-logo.png"
 
 # required_apps = []
 
@@ -21,8 +21,8 @@ web_include_css = [
     "/assets/dynamic_15/css/dynamic_15_login.css"
                    ]
 website_context = {
-    "favicon": "/assets/dynamic_15/images/logo.ico",
-    "splash_image": "/assets/dynamic_15/images/dynamic-logo-colors.png"
+    "favicon": "/assets/dynamic_15/images/new_logo.ico",
+    "splash_image": "/assets/dynamic_15/images/erp-system-logo.png"
     }
 # web_include_js = "/assets/dynamic_15/js/dynamic_15.js"
 

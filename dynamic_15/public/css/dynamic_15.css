@@ -137,7 +137,7 @@ h6.uppercase {
 
 .navbar .navbar-home img {
     filter: brightness(0) invert(1);
-    max-height: 48px;
+    max-height: 35px;
 }
 
 /* Dropdowns */
