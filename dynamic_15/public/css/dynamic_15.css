@@ -4,6 +4,12 @@ body {
     font-family: "Cairo", sans-serif !important;
 
     --btn-primary: #f18b26;
+    --primary: #f18b26;
+}
+
+/* Components */
+input[type="checkbox"]:checked {
+    background-image: url("data:image/svg+xml, <svg viewBox='0 0 8 7' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M1 4.00001L2.66667 5.80001L7 1.20001' stroke='white' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/></svg>"), linear-gradient(var(--primary), var(--primary));
 }
 
 /* Main */
@@ -130,9 +136,8 @@ h6.uppercase {
 }
 
 .navbar .navbar-home img {
-    width: 100px !important;
-    margin-right: 0;
-    margin-top: -3px;
+    filter: brightness(0) invert(1);
+    max-height: 48px;
 }
 
 /* Dropdowns */

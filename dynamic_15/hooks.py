@@ -16,7 +16,14 @@ app_include_css = "/assets/dynamic_15/css/dynamic_15.css"
 # app_include_js = "/assets/dynamic_15/js/dynamic_15.js"
 
 # include js, css files in header of web template
-# web_include_css = "/assets/dynamic_15/css/dynamic_15.css"
+web_include_css = [
+    "/assets/dynamic_15/css/dynamic_15.css",
+    "/assets/dynamic_15/css/dynamic_15_login.css"
+                   ]
+website_context = {
+    "favicon": "/assets/dynamic_15/images/logo.ico",
+    "splash_image": "/assets/dynamic_15/images/dynamic-logo-colors.png"
+    }
 # web_include_js = "/assets/dynamic_15/js/dynamic_15.js"
 
 # include custom scss in every website theme (without file extension ".scss")
@@ -38,7 +45,7 @@ app_include_css = "/assets/dynamic_15/css/dynamic_15.css"
 # Svg Icons
 # ------------------
 # include app icons in desk
-# app_include_icons = "dynamic_15/public/icons.svg"
+# app_include_icons = "/assets/dynamic_15/images/dynamic-logo.png"
 
 # Home Pages
 # ----------
