@@ -1,0 +1,69 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-08-05 17:01:15.859183",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+     "comm_desc",
+     "comm_type",
+     "amount",
+     "min",
+     "max"
+],
+"fields": [
+     {
+      "fieldname": "comm_desc",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "label": "Comm Desc",
+      "options": "Collect\nPay\nReject",
+      "reqd": 1
+     },
+     {
+      "fieldname": "comm_type",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "label": "Comm Type",
+      "options": "Amount\nPercent",
+      "reqd": 1
+     },
+     {
+      "default": "0",
+      "fieldname": "amount",
+      "fieldtype": "Float",
+      "in_list_view": 1,
+      "label": "Amount",
+      "reqd": 1
+     },
+     {
+      "default": "0",
+      "fieldname": "min",
+      "fieldtype": "Float",
+      "in_list_view": 1,
+      "label": "Min",
+      "reqd": 1
+     },
+     {
+      "default": "0",
+      "fieldname": "max",
+      "fieldtype": "Float",
+      "in_list_view": 1,
+      "label": "Max",
+      "reqd": 1
+     }
+],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2024-08-05 17:01:15.859183",
+ "modified_by": "Administrator",
+ "module": "Cheques",
+ "name": "Bank Commissions",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

@@ -12,3 +12,31 @@ def create_domain_list():
 		dm1 = frappe.new_doc("Domain")
 		dm1.domain = 'Tebian'
 		dm1.insert()
+		
+	if not frappe.db.exists("Domain", "Dynamic Accounts"):
+		try:
+			dm = frappe.get_doc({
+				"doctype": "Domain",
+				"domain": "Dynamic Accounts"
+			})
+			dm.insert()
+			frappe.db.commit()
+		except frappe.DuplicateEntryError:
+			print("Domain 'Dynamic Accounts' already exists.")
+		except Exception as e:
+			print(f"An error occurred: {e}")
+			frappe.db.rollback()
+			
+	if not frappe.db.exists("Domain", "Cheques"):
+		try:
+			dm = frappe.get_doc({
+				"doctype": "Domain",
+				"domain": "Cheques"
+			})
+			dm.insert()
+			frappe.db.commit()
+		except frappe.DuplicateEntryError:
+			print("Domain 'Cheques' already exists.")
+		except Exception as e:
+			print(f"An error occurred: {e}")
+			frappe.db.rollback()

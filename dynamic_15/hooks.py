@@ -38,7 +38,12 @@ website_context = {
 
 # include js in doctype views
 doctype_js = {
-    "Stock Entry" : "public/js/stock_entry.js"
+    "Stock Entry" : "public/js/stock_entry.js",
+    "Payment Entry" : "public/js/payment_entry.js",
+    "Sales Order" : "public/js/sales_order.js",
+    "Sales Invoice" : "public/js/sales_invoice.js",
+    "Purchase Order" : "public/js/purchase_order.js",
+    "Purchase Invoice" : "public/js/purchase_invoice.js",
     }
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
@@ -87,9 +92,7 @@ after_migrate = [
     "dynamic_15.install.after_install",
 ]
 
-domains = {
-    "Tebian" : "dynamic_15.domains.tebian"
-}
+
 # Uninstallation
 # ------------
 
@@ -147,13 +150,15 @@ override_doctype_class = {
 # ---------------
 # Hook on document methods and events
 
-# doc_events = {
-# 	"*": {
-# 		"on_update": "method",
-# 		"on_cancel": "method",
-# 		"on_trash": "method"
-# 	}
-# }
+doc_events = {
+	"Payment Entry": {
+        "on_update_after_submit": "dynamic_15.api.update_paymentrntry",
+    },
+    "Journal Entry": {
+        "on_submit": "dynamic_15.api.submit_journal_entry",
+    },
+
+}
 
 # Scheduled Tasks
 # ---------------
@@ -241,6 +246,17 @@ override_doctype_class = {
 
 # Authentication and authorization
 # --------------------------------
+override_doctype_dashboards = {
+    "Payment Entry": "dynamic_15.public.dashboard.payment_entry_dashboard.get_data",
+}
+
+
+domains = {
+    "Tebian" : "dynamic_15.domains.tebian",
+    "Cheques" : "dynamic_15.domains.cheques",
+    "Dynamic Accounts" : "dynamic_15.domains.dynamic_accounts",
+    
+}
 
 # auth_hooks = [
 # 	"dynamic_15.auth.validate"
@@ -253,3 +269,18 @@ override_doctype_class = {
 # 	"Logging DocType Name": 30  # days to retain logs
 # }
 
+fixtures = [
+    {
+        "dt": ("Custom Field"),
+        "filters": [
+            [
+                "name",
+                "in",
+                (
+                    "Journal Entry Account-party_name",
+                    "Cheque-party_name",
+                ),
+            ]
+        ],
+    }
+]
