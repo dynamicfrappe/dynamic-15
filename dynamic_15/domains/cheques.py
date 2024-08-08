@@ -483,17 +483,16 @@ data = {
                 "read_only": 1,
                 "allow_on_submit": 1
             },
-            # {
-
-            #     "fieldname": "cheque",
-            #     "fieldtype": "Link",
-            #     "insert_after": "payment_entry",
-            #     "label": "Cheque",
-            #     "options": "Cheque",
-            #     "read_only": 1,
-            #     "allow_on_submit": 1,
-            #     "fetch_from": "payment_entry.cheque"
-            # },
+            {
+                "fieldname": "cheque",
+                "fieldtype": "Link",
+                "insert_after": "payment_entry",
+                "label": "Cheque",
+                "options": "Cheque",
+                "read_only": 1,
+                "allow_on_submit": 1,
+                "fetch_from": "payment_entry.cheque"
+            },
             {
                 "fieldname": "cheque_status",
                 "fieldtype": "Data",
