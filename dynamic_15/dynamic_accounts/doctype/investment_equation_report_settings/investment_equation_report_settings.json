@@ -31,7 +31,7 @@
       "fieldname": "assets",
       "fieldtype": "Table",
       "label": "Assets",
-      "options": "investment Equation Account"
+      "options": "Investment Equation Account"
      },
      {
       "fieldname": "equ_section",
@@ -42,7 +42,7 @@
       "fieldname": "equity",
       "fieldtype": "Table",
       "label": "Equity",
-      "options": "investment Equation Account"
+      "options": "Investment Equation Account"
      }
  ],
  "index_web_pages_for_search": 1,
