@@ -4,7 +4,7 @@
 frappe.ui.form.on("Pay Document", {
     onload: function (frm) {
           frappe.call({
-              method: "dynamic.dynamic_accounts.doctype.pay_document.pay_document.get_field_options",
+              method: "dynamic_15.dynamic_accounts.doctype.pay_document.pay_document.get_field_options",
               callback: function (r) {
                   $.each(r.message, (key, value) => {
                       set_field_options(key, value);
