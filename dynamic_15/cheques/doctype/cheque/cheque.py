@@ -691,7 +691,7 @@ def pay_cash_new(payment_entry):
         "account":  cash_def_account,
         "credit_in_account_currency": flt(payment_entry.paid_amount),
         "reference_type": cheque_doc.doctype,
-        "reference_name": payment_entry.cheque,
+        "reference_name": cheque_doc.name,
         # "party_type": payment_entry.party_type,
         # "party": payment_entry.party
         })
@@ -699,7 +699,7 @@ def pay_cash_new(payment_entry):
             "account": payment_entry.paid_from,
             "debit_in_account_currency": flt(payment_entry.paid_amount),
             "reference_type": cheque_doc.doctype,
-            "reference_name": payment_entry.cheque,
+            "reference_name": cheque_doc.name,
             # "party_type": payment_entry.party_type,
             # "party": payment_entry.party
 
@@ -711,7 +711,7 @@ def pay_cash_new(payment_entry):
             "account": company.rejected_cheques_bank_account,
             "credit_in_account_currency": flt(payment_entry.paid_amount),
             "reference_type": cheque_doc.doctype,
-            "reference_name": payment_entry.cheque,
+            "reference_name": cheque_doc.name,
             # "party_type": payment_entry.party_type,
             # "party": payment_entry.party
 
@@ -720,7 +720,7 @@ def pay_cash_new(payment_entry):
             "account": payment_entry.paid_to,
             "debit_in_account_currency": flt(payment_entry.paid_amount),
             "reference_type": cheque_doc.doctype,
-            "reference_name": payment_entry.cheque,
+            "reference_name": cheque_doc.name,
             "party_type": payment_entry.party_type,
             "party": payment_entry.party
 
@@ -731,7 +731,7 @@ def pay_cash_new(payment_entry):
             "account": payment_entry.cheques_receivable_account,
             "credit_in_account_currency": flt(payment_entry.paid_amount),
             "reference_type": cheque_doc.doctype,
-            "reference_name": payment_entry.cheque,
+            "reference_name": cheque_doc.name,
             # "party_type": payment_entry.party_type,
             # "party": payment_entry.party
         })
@@ -745,7 +745,7 @@ def pay_cash_new(payment_entry):
             "account": account_paid_to,
             "debit_in_account_currency": flt(payment_entry.paid_amount),
             "reference_type": cheque_doc.doctype,
-            "reference_name": payment_entry.cheque,
+            "reference_name": cheque_doc.name,
             # "party_type": payment_entry.party_type,
             # "party": payment_entry.party
 
@@ -755,7 +755,7 @@ def pay_cash_new(payment_entry):
     #     "account":  cash_def_account,
     #     "debit_in_account_currency": flt(payment_entry.paid_amount),
     #     "reference_type": cheque_doc.doctype,
-    #     "reference_name": payment_entry.cheque,
+    #     "reference_name": cheque_doc.name,
     #     "party_type": payment_entry.party_type,
     #     "party": payment_entry.party
     # })
