@@ -23,6 +23,14 @@ def submit_journal_entry(doc, fun=""):
 		submit_journal_entry_cheques(doc)
 
 @frappe.whitelist()
+def save_item(doc, *args, **kwargs):
+	if "UOM" in DOMAINS:
+		for item in doc.uoms:
+			if item.idx == 1:
+				item.total = doc.length * doc.width * doc.height
+
+
+@frappe.whitelist()
 def update_paymentrntry(doc, *args, **kwargs):
 	if "Cheques" in DOMAINS:
 		# validate party account with part type

@@ -157,6 +157,9 @@ doc_events = {
     "Journal Entry": {
         "on_submit": "dynamic_15.api.submit_journal_entry",
     },
+    "Item": {
+        "before_save": "dynamic_15.api.save_item",
+    },
 
 }
 
@@ -255,7 +258,7 @@ domains = {
     "Tebian" : "dynamic_15.domains.tebian",
     "Cheques" : "dynamic_15.domains.cheques",
     "Dynamic Accounts" : "dynamic_15.domains.dynamic_accounts",
-    
+    "UOM" : "dynamic_15.domains.uom", 
 }
 
 # auth_hooks = [

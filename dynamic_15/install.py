@@ -12,7 +12,10 @@ def create_domain_list():
 		dm1 = frappe.new_doc("Domain")
 		dm1.domain = 'Tebian'
 		dm1.insert()
-		
+	if not frappe.db.exists("Domain", "UOM"):
+		dm1 = frappe.new_doc("Domain")
+		dm1.domain = 'UOM'
+		dm1.insert()
 	if not frappe.db.exists("Domain", "Dynamic Accounts"):
 		try:
 			dm = frappe.get_doc({
