@@ -16,6 +16,10 @@ def create_domain_list():
 		dm1 = frappe.new_doc("Domain")
 		dm1.domain = 'UOM'
 		dm1.insert()
+	if not frappe.db.exists("Domain", "Item Barcode"):
+		dm1 = frappe.new_doc("Domain")
+		dm1.domain = 'Item Barcode'
+		dm1.insert()
 	if not frappe.db.exists("Domain", "Dynamic Accounts"):
 		try:
 			dm = frappe.get_doc({

@@ -159,6 +159,7 @@ doc_events = {
     },
     "Item": {
         "before_save": "dynamic_15.api.save_item",
+        "Item":"dynamic_15.item_barcode.item_barcode.create_item_barcode",
     },
 
 }
