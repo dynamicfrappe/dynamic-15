@@ -129,8 +129,8 @@ def get_sales(*args , **kwargs):
 				],
 			)
 			return {
-				"data":invoices,
-				"message":f"""Number of invoices: {len(invoices)}"""
+				"message":f"""Number of invoices: {len(invoices)}""",
+				"data":invoices
 			}
 	except Exception as e:
 		frappe.log_error(message=str(e), title=_('Error in get_sales'))
