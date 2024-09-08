@@ -1,6 +1,8 @@
 import frappe
 from frappe import _
 from dynamic_15.cheques.doctype.cheque.cheque import add_row_cheque_tracks
+from frappe.utils import getdate
+
 
 @frappe.whitelist()
 def get_active_domains():
@@ -66,3 +68,63 @@ def update_paymentrntry(doc, *args, **kwargs):
 					frappe.db.commit()
 					#  frappe.throw(_(f" Endorsed Party Account type is {party_type_account_type} and party type {doc.endorsed_party_type} "))
 					# get defalu party type account
+
+
+import random
+import math
+Domains=frappe.get_active_domains()
+
+def get_barcode(digist =False ) :
+	if not digist :
+		digits = 6 
+	numbers = [i for i in range(0, 10)] 
+	random_str = ""
+	for i in range(digits):
+		index = math.floor(random.random() * 10)
+		random_str += str(numbers[index])
+
+	return random_str
+
+
+@frappe.whitelist()
+def create_item_barcode(doc ,*args , **kwargs) :
+	if "Item Barcode" in Domains:
+		barcode = get_barcode()
+		if not doc.barcodes :
+			row = doc.append("barcodes")
+			row.barcode = barcode
+			row.uom = doc.stock_uom
+		if not doc.custom_barcode or len(doc.custom_barcode) < 3 :
+			doc.custom_barcode = barcode
+
+
+from datetime import datetime 
+@frappe.whitelist(allow_guest=False)
+def get_sales(*args , **kwargs):
+	if kwargs.get("pos_profile"):
+		pos_profile = kwargs.get("pos_profile")
+		from_date = datetime.strptime(kwargs.get("from_date"), '%Y-%m-%d')
+		to_date = datetime.strptime(kwargs.get("to_date"), '%Y-%m-%d')
+
+		filters = []
+		filters.append(("pos_profile","=", pos_profile))
+		filters.append(("docstatus","=", 1))
+		if from_date :
+			filters.append(("posting_date",">=", from_date))
+
+		if to_date:
+			filters.append(("posting_date","<=", to_date))
+
+		invoices = frappe.get_list(
+			"POS Invoice",
+			filters=filters,
+			fields=[
+				"name as invoice_number",
+				"creation as invoice_date",
+				"total as invoice_subtotal",
+				"total_taxes_and_charges as tax",
+				"discount_amount as discount",
+				"grand_total as invoice_total"
+			],
+		)
+		return invoices

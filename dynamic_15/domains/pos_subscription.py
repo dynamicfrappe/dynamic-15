@@ -15,7 +15,21 @@ data = {
         ]
     },
       "properties": [
-        
+        {
+            "doctype": "POS Profile",
+            "doctype_or_field": "DocField",
+            "fieldname": "disabled",
+            "property": "read_only",
+            "property_type": "Check",
+            "value": "1",
+        },
+        {
+            "doctype": "POS Profile",
+            "doctype_or_field": "DocField",
+            "fieldname": "disabled",
+            "property": "default",
+            "value": "1",
+        },
     ],
   
 }

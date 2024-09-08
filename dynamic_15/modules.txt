@@ -2,3 +2,5 @@ Dynamic Css Version 15
 Tebian
 Cheques
 Dynamic Accounts
+POS Subscription
+Item Barcode
