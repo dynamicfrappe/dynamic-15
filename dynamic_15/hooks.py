@@ -261,6 +261,7 @@ domains = {
     "Dynamic Accounts" : "dynamic_15.domains.dynamic_accounts",
     "UOM" : "dynamic_15.domains.uom", 
     "Item Barcode":"dynamic_15.domains.item_barcode",
+    "POS Subscription ":"dynamic_15.domains.pos_subscription",
 }
 
 # auth_hooks = [
