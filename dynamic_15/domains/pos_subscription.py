@@ -1,8 +1,15 @@
-data = {
-	'custom_fields': {
+from __future__ import unicode_literals
+import frappe
+from frappe import _
 
-	},
-		"properties": [
-            		
-	],  
+data = {
+
+    'custom_fields': {
+        
+    },
+      "properties": [
+        
+    ],
+  
 }
+
