@@ -260,6 +260,7 @@ domains = {
     "Cheques" : "dynamic_15.domains.cheques",
     "Dynamic Accounts" : "dynamic_15.domains.dynamic_accounts",
     "UOM" : "dynamic_15.domains.uom", 
+    "Item Barcode":"dynamic_15.domains.item_barcode",
 }
 
 # auth_hooks = [
