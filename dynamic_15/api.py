@@ -101,30 +101,37 @@ def create_item_barcode(doc ,*args , **kwargs) :
 from datetime import datetime 
 @frappe.whitelist(allow_guest=False)
 def get_sales(*args , **kwargs):
-	if kwargs.get("pos_profile"):
-		pos_profile = kwargs.get("pos_profile")
-		from_date = datetime.strptime(kwargs.get("from_date"), '%Y-%m-%d')
-		to_date = datetime.strptime(kwargs.get("to_date"), '%Y-%m-%d')
+	try:
+		if kwargs.get("pos_profile"):
+			pos_profile = kwargs.get("pos_profile")
+			from_date = datetime.strptime(kwargs.get("from_date"), '%Y-%m-%d')
+			to_date = datetime.strptime(kwargs.get("to_date"), '%Y-%m-%d')
 
-		filters = []
-		filters.append(("pos_profile","=", pos_profile))
-		filters.append(("docstatus","=", 1))
-		if from_date :
-			filters.append(("posting_date",">=", from_date))
+			filters = []
+			filters.append(("pos_profile","=", pos_profile))
+			filters.append(("docstatus","=", 1))
+			if from_date :
+				filters.append(("posting_date",">=", from_date))
 
-		if to_date:
-			filters.append(("posting_date","<=", to_date))
+			if to_date:
+				filters.append(("posting_date","<=", to_date))
 
-		invoices = frappe.get_list(
-			"POS Invoice",
-			filters=filters,
-			fields=[
-				"name as invoice_number",
-				"creation as invoice_date",
-				"total as invoice_subtotal",
-				"total_taxes_and_charges as tax",
-				"discount_amount as discount",
-				"grand_total as invoice_total"
-			],
-		)
-		return invoices
+			invoices = frappe.get_list(
+				"POS Invoice",
+				filters=filters,
+				fields=[
+					"name as invoice_number",
+					"creation as invoice_date",
+					"total as invoice_subtotal",
+					"total_taxes_and_charges as tax",
+					"discount_amount as discount",
+					"grand_total as invoice_total"
+				],
+			)
+			return {
+				"data":invoices,
+				"message":f"""Number of invoices: {len(invoices)}"""
+			}
+	except Exception as e:
+		frappe.log_error(message=str(e), title=_('Error in get_sales'))
+		frappe.local.response['http_status_code'] = 500
