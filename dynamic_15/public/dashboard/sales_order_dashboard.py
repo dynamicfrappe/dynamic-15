@@ -16,5 +16,12 @@ def get_data(data={}):
                 'items': ['Journal Entry']
             },
         )
+    if "United Enginering" in DOMAINS:
+        dashboard_data["transactions"].append(
+            {
+                'label': _('References'),
+                'items': ['Stock Entry']
+            },
+        )
 
     return dashboard_data
