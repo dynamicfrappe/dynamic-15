@@ -64,4 +64,18 @@ def create_domain_list():
 			print("Domain 'United Enginering' already exists.")
 		except Exception as e:
 			print(f"An error occurred: {e}")
-			frappe.db.rollback()	
+			frappe.db.rollback()
+				
+	if not frappe.db.exists("Domain", "Real State"):
+		try:
+			dm = frappe.get_doc({
+				"doctype": "Domain",
+				"domain": "Real State"
+			})
+			dm.insert()
+			frappe.db.commit()
+		except frappe.DuplicateEntryError:
+			print("Domain 'Real State' already exists.")
+		except Exception as e:
+			print(f"An error occurred: {e}")
+			frappe.db.rollback()

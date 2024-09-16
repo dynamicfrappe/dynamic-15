@@ -135,3 +135,101 @@ def get_sales(*args , **kwargs):
 	except Exception as e:
 		frappe.log_error(message=str(e), title=_('Error in get_sales'))
 		frappe.local.response['http_status_code'] = 500
+
+@frappe.whitelist()
+def validate_stock_entry(doc, *args, **kwargs):
+	if "Real State" in DOMAINS:
+		if (
+			doc.get("real_state_cost")
+			and doc.get("stock_entry_type") == "Material Issue"
+		):
+			real_stat_cost = frappe.get_doc(
+				"Real State Cost", doc.get("real_state_cost")
+			)
+			for item in real_stat_cost.items:
+				for row in doc.items:
+					row.item_code == item.item_code
+					row.basic_rate = item.amount / item.qty
+					row.amount = item.amount
+					row.basic_amount = item.amount
+	
+@frappe.whitelist()
+def before_submit_quot(doc, *args, **kwargs):
+	if "Real State" in DOMAINS:
+		hold_item_reserved(doc, *args, **kwargs)
+
+
+def before_save_quotation(doc, *args, **kwargs):
+	if "Real State" in DOMAINS:
+		reserve_unit(doc)
+		
+		
+	if "Dynamic Accounts" in DOMAINS:
+		meta = frappe.get_meta(doc.doctype)
+		if meta.has_field("outstanding_amount"):
+			if len(doc.get("advancess")):
+				total_advance_paid = sum(
+					adv.advance_amount for adv in doc.get("advancess")
+				)
+				doc.db_set("advance_paid", total_advance_paid)
+				doc.db_set("outstanding_amount", doc.grand_total - total_advance_paid)
+
+def on_cencel(self , *args, **kwargs ):
+	if "Real State" in DOMAINS:
+		cencel_reserve_unit(self)
+
+def hold_item_reserved(doc, *args, **kwargs):
+	for row in doc.items:
+		if row.qty > 1:
+			frappe.throw(_("Qty Should be 1 "))
+		frappe.db.set_value("Item", row.item_code, "reserved", 1)
+
+@frappe.whitelist()
+def cencel_reserve_unit(self):
+	items = self.get('items')
+	for item in items:
+		item_obj = frappe.get_doc("Item" , item.item_code)
+		item_obj.reserved = 0
+		item_obj.save()
+
+
+@frappe.whitelist()
+def reserve_unit(self):
+	items = self.get('items')
+	for item in items:
+		item_obj = frappe.get_doc("Item" , item.item_code)
+		item_obj.reserved = 1
+		item_obj.save()
+
+@frappe.whitelist()
+def before_submit_so(doc, *args, **kwargs):
+	if "Real State" in DOMAINS:
+		set_advences_to_schedules(doc, *args, **kwargs)
+
+@frappe.whitelist()
+def set_advences_to_schedules(doc, *args, **kwargs):
+	total_advance = 0
+	if doc.advancess:
+		total_advance = 0
+		for advance in doc.advancess:
+			total_advance += advance.allocated_amount
+	if doc.payment_schedule:
+		for schedule in doc.payment_schedule:
+			if (
+				total_advance > 0
+				and (schedule.outstanding - (schedule.paid_amount or 0)) > 0
+			):
+				advance_added_amount = schedule.outstanding - (
+					schedule.paid_amount or 0
+				)
+				if advance_added_amount >= total_advance:
+					schedule.db_set(
+						"paid_amount", (schedule.paid_amount or 0) + total_advance
+					)
+					total_advance = 0
+				elif advance_added_amount < total_advance:
+					schedule.db_set(
+						"paid_amount",
+						(schedule.paid_amount or 0) + advance_added_amount,
+					)
+					total_advance -= advance_added_amount
