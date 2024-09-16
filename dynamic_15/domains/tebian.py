@@ -59,6 +59,27 @@ data = {
 				"fieldtype": "Check",
 				"insert_after": "weight_rate" ,
 				},
+			],
+            'Customer':[	
+                {
+				"label": "Categories",
+				"fieldname": "categories",
+				"fieldtype": "Link",
+                "options":"Categories",
+				"insert_after": "market_segment" ,
+				},
+                {
+				"label": "Commerical Number",
+				"fieldname": "commerical_number",
+				"fieldtype": "Data",
+				"insert_after": "tax_id" ,
+				},
+                {
+				"label": "Customer Name in English",
+				"fieldname": "customer_name_in_english",
+				"fieldtype": "Data",
+				"insert_after": "customer_name" ,
+				},
 			],	
 	},
 		"properties": [
