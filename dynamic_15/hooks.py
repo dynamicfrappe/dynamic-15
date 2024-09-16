@@ -44,6 +44,7 @@ doctype_js = {
     "Sales Invoice" : "public/js/sales_invoice.js",
     "Purchase Order" : "public/js/purchase_order.js",
     "Purchase Invoice" : "public/js/purchase_invoice.js",
+    "Task" : "public/js/task.js"
     }
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
@@ -252,6 +253,14 @@ doc_events = {
 # --------------------------------
 override_doctype_dashboards = {
     "Payment Entry": "dynamic_15.public.dashboard.payment_entry_dashboard.get_data",
+    "Purchase Invoice": "dynamic_15.public.dashboard.purchase_invoice_dashboard.get_data",
+    "Purchase Order": "dynamic_15.public.dashboard.purchase_order_dashboard.get_data",
+    "Sales Invoice": "dynamic_15.public.dashboard.sales_invoice_dashboard.get_data",
+    "Sales Order": "dynamic_15.public.dashboard.sales_order_dashboard.get_data",
+    "Stock Entry": "dynamic_15.public.dashboard.stock_entry_dashboard.get_data",
+    "Quotation": "dynamic_15.public.dashboard.quotation_dashboard.get_data",
+    "Delivery Note": "dynamic_15.public.dashboard.delivery_note_dashboard.get_data",
+    "Task": "dynamic_15.public.dashboard.task_dashboard.get_data",
 }
 
 
@@ -262,6 +271,7 @@ domains = {
     "UOM" : "dynamic_15.domains.uom", 
     "Item Barcode":"dynamic_15.domains.item_barcode",
     "POS Subscription":"dynamic_15.domains.pos_subscription",
+    "United Enginering" : "dynamic_15.domains.united_engineering",
 }
 
 # auth_hooks = [
