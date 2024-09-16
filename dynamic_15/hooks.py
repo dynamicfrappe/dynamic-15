@@ -44,7 +44,9 @@ doctype_js = {
     "Sales Invoice" : "public/js/sales_invoice.js",
     "Purchase Order" : "public/js/purchase_order.js",
     "Purchase Invoice" : "public/js/purchase_invoice.js",
-    "Task" : "public/js/task.js"
+    "Task" : "public/js/task.js",
+    "Item" : "public/js/item.js",
+    "payment_terms_template": "public/js/payment_terms_template.js",
     }
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
@@ -162,19 +164,25 @@ doc_events = {
         "before_save": "dynamic_15.api.save_item",
         "Item":"dynamic_15.api.create_item_barcode",
     },
+    "Sales Order": {
+        "on_submit": [
+            "dynamic.real_state.rs_api.so_on_submit",
+        ],
+        
+    },
 
 }
 
 # Scheduled Tasks
 # ---------------
 
-# scheduler_events = {
+scheduler_events = {
 # 	"all": [
 # 		"dynamic_15.tasks.all"
 # 	],
-# 	"daily": [
-# 		"dynamic_15.tasks.daily"
-# 	],
+	"daily": [
+ 		"dynamic_15.real_state.rs_api.setup_payment_term_notify",
+	],
 # 	"hourly": [
 # 		"dynamic_15.tasks.hourly"
 # 	],
@@ -184,7 +192,7 @@ doc_events = {
 # 	"monthly": [
 # 		"dynamic_15.tasks.monthly"
 # 	],
-# }
+}
 
 # Testing
 # -------
@@ -272,6 +280,7 @@ domains = {
     "Item Barcode":"dynamic_15.domains.item_barcode",
     "POS Subscription":"dynamic_15.domains.pos_subscription",
     "United Enginering" : "dynamic_15.domains.united_engineering",
+    "Real State": "dynamic_15.domains.real_state",
 }
 
 # auth_hooks = [

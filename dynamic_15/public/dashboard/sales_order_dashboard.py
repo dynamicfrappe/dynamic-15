@@ -1,8 +1,6 @@
 
 from frappe import _
 from frappe import get_active_domains
-#/home/beshoy/Dynamic-13/tera/frappe-tera/apps/erpnext/erpnext/selling/doctype/sales_order/sales_order_dashboard.py
-# from erpnext.selling.doctype.sales_order.sales_order_dashboard import get_data as dashboard_data_data
 
 DOMAINS = get_active_domains()
 
