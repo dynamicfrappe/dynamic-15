@@ -256,7 +256,7 @@ override_doctype_dashboards = {
 
 
 domains = {
-    "Tebian" : "dynamic_15.domains.tebian",
+    # "Tebian" : "dynamic_15.domains.tebian",
     "Cheques" : "dynamic_15.domains.cheques",
     "Dynamic Accounts" : "dynamic_15.domains.dynamic_accounts",
     "UOM" : "dynamic_15.domains.uom", 
