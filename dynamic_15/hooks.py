@@ -166,22 +166,22 @@ doc_events = {
     },
     "Sales Order": {
         "on_submit": [
-            "dynamic.real_state.rs_api.so_on_submit",
+            "dynamic_15.real_state.rs_api.so_on_submit",
         ],
-        "before_submit": ["dynamic.api.before_submit_so"],
+        "before_submit": ["dynamic_15.api.before_submit_so"],
         
     },
     "Stock Ledger Entry": {
         "before_insert": "dynamic_15.real_state.rs_api.stock_ledger_entry_before_insert"
     },
     "Quotation": {
-        "before_submit": "dynamic.api.before_submit_quot",
-        "before_save": "dynamic.api.before_save_quotation",
-        "on_cancel" :"dynamic.api.on_cencel",
+        "before_submit": "dynamic_15.api.before_submit_quot",
+        "before_save": "dynamic_15.api.before_save_quotation",
+        "on_cancel" :"dynamic_15.api.on_cencel",
     },
     "Stock Entry": {
         "validate": [
-            "dynamic.api.validate_stock_entry",  
+            "dynamic_15.api.validate_stock_entry",  
         ],
     },
 }
