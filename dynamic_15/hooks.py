@@ -168,9 +168,22 @@ doc_events = {
         "on_submit": [
             "dynamic.real_state.rs_api.so_on_submit",
         ],
+        "before_submit": ["dynamic.api.before_submit_so"],
         
     },
-
+    "Stock Ledger Entry": {
+        "before_insert": "dynamic_15.real_state.rs_api.stock_ledger_entry_before_insert"
+    },
+    "Quotation": {
+        "before_submit": "dynamic.api.before_submit_quot",
+        "before_save": "dynamic.api.before_save_quotation",
+        "on_cancel" :"dynamic.api.on_cencel",
+    },
+    "Stock Entry": {
+        "validate": [
+            "dynamic.api.validate_stock_entry",  
+        ],
+    },
 }
 
 # Scheduled Tasks

@@ -478,3 +478,16 @@ def send_insurance_notify(**kwargs):
 			notif_doc.from_user = frappe.session.user or ""
 			notif_doc.insert(ignore_permissions=True)
 			frappe.db.commit()
+
+
+def stock_ledger_entry_before_insert(stock_leger_entry_doc,*args,**kwargs):
+    if 'Real State' in DOMAINS:
+        if stock_leger_entry_doc.actual_qty > 0:
+            item_code = stock_leger_entry_doc.get('item_code')
+            warehouse = stock_leger_entry_doc.get('warehouse')
+            get_avail_bin_qty(item_code,warehouse,stock_leger_entry_doc.actual_qty)
+
+def get_avail_bin_qty(item_code,warehouse,in_qty):
+    actual_qty = (get_stock_availability(item_code,warehouse)[0] or 0)
+    if actual_qty + in_qty  > 1:
+        pass
