@@ -4,8 +4,9 @@ frappe.ui.form.on("Sales Order", {
       frm.custom_make_buttons = {
         "Cheque": "Cheque",
       };
+      frm.events.setup_doc_event(frm)
     },
-    
+
     refresh: function (frm) {  
      
       frm.events.add_cheque_button(frm);
@@ -15,7 +16,33 @@ frappe.ui.form.on("Sales Order", {
     onload: function (frm) {
     },
     
-  
+    transaction_date:function(frm){
+      frm.events.setup_doc_event(frm)
+    },
+    
+    setup_doc_event:function(frm){
+      if (frm.doc.transaction_date){
+        frappe.call({
+          method: "dynamic_15.api.get_active_domains",
+          callback: function (r) {
+            if (r.message && r.message.length) {
+              if (r.message.includes("Real State")) {
+                frappe.call({
+                  method:"dynamic_15.real_state.rs_api.add_year_date",
+                  args:{
+                    trans_date:  frm.doc.transaction_date
+                    },
+                  callback:function(r){
+                    frm.set_value('delivery_date',r.message)
+                    frm.refresh_field('delivery_date')
+                  }
+                })
+              }
+          }}
+      })
+      }
+    },
+
     add_cheque_button(frm) {
       if (frm.doc.docstatus == 1) {
         frappe.call({
@@ -254,7 +281,45 @@ frappe.ui.form.on("Sales Order", {
   
   });
   
+  const extend_sales_order = erpnext.selling.SalesOrderController.extend({
+    
+    refresh: function(doc, dt, dn) {
+      var me = this;
+      this._super(doc);
+        if(doc.status !== 'Closed') {
+          if(doc.status !== 'On Hold') {
+            
+            frappe.call({
+              method: "dynamic_15.api.get_active_domains",
+              callback: function (r) {
+                if (r.message && r.message.length) {
+                  
+                  if (r.message.includes("Real State")){
+                    // console.log('domains real state')
+                    cur_frm.cscript['get_method_for_payment'] = create_payment_for_real_state
+                  }
+                }
+              }
+            })
   
+          }
+        }
+    },
+    
+  });
+  
+  var create_payment_for_real_state = function(){
+    var method = "dynamic_15.real_state.rs_api.get_payment_entry";
+    if(cur_frm.doc.__onload && cur_frm.doc.__onload.make_payment_via_journal_entry){
+      if(in_list(['Sales Invoice', 'Purchase Invoice'],  cur_frm.doc.doctype)){
+        method = "erpnext.accounts.doctype.journal_entry.journal_entry.get_payment_entry_against_invoice";
+      }else {
+        method= "erpnext.accounts.doctype.journal_entry.journal_entry.get_payment_entry_against_order";
+      }
+    }
+    // console.log(method)
+    return method
+  }
   frappe.ui.form.on("Sales Order Item", { 
    
   });
