@@ -82,6 +82,13 @@ data = {
         ],
 	},
 	"properties": [
-        	
-	],  
+        {
+            "doctype": "Task",
+            "doctype_or_field": "DocField",
+            "fieldname": "status",
+            "property": "options",
+            "property_type": "Small Text",
+            "value": "Pending\nOpen\nWorking\nPending Review\nOverdue\nTemplate\nCompleted\nCancelled",
+        },
+	],
 }

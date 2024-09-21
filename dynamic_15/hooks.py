@@ -185,6 +185,11 @@ doc_events = {
             "dynamic_15.api.validate_stock_entry",  
         ],
     },
+    "Task": {
+        "before_save":[
+            "dynamic_15.controllers.before_save",
+        ]
+    }
 }
 
 # Scheduled Tasks
