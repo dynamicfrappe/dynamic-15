@@ -1,13 +1,14 @@
 
 
 
-frappe.ui.form.on("Payment Terms Template", {
+frappe.ui.form.on("Payment Terms Template", 
+{
     refresh:function(frm){
         frm.events.add_child_btn(frm)
     },
     add_child_btn:function(frm){
         frappe.call({
-            method: "dynamic.api.get_active_domains",
+            method: "dynamic_15.api.get_active_domains",
             callback: function (r) {
               if (r.message && r.message.length) {
                 if (r.message.includes("Real State")) {
@@ -63,7 +64,7 @@ frappe.ui.form.on("Payment Terms Template", {
         
     },
 
-})
+  });
 
 
 frappe.ui.form.on("Payment Terms Template Detail", {
