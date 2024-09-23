@@ -1,3 +1,4 @@
+
 frappe.ui.form.on("Sales Order", { 
    
     setup:function(frm) {
@@ -281,9 +282,9 @@ frappe.ui.form.on("Sales Order", {
   
   });
   
-  const extend_sales_order = erpnext.selling.SalesOrderController.extend({
+  erpnext.selling.SalesOrderController = class SalesOrderController extends erpnext.selling.SellingController {
     
-    refresh: function(doc, dt, dn) {
+     refresh(doc, dt, dn)  {
       var me = this;
       this._super(doc);
         if(doc.status !== 'Closed') {
@@ -304,9 +305,9 @@ frappe.ui.form.on("Sales Order", {
   
           }
         }
-    },
+    }
     
-  });
+  };
   
   var create_payment_for_real_state = function(){
     var method = "dynamic_15.real_state.rs_api.get_payment_entry";
@@ -320,6 +321,13 @@ frappe.ui.form.on("Sales Order", {
     // console.log(method)
     return method
   }
+
+  extend_cscript(cur_frm.cscript, new erpnext.selling.SalesOrderController({ frm: cur_frm }));
+  // $.extend(
+  // 	cur_frm.cscript,
+  // 	new extend_sales_order({frm: cur_frm}),
+  // );
+
   frappe.ui.form.on("Sales Order Item", { 
    
   });

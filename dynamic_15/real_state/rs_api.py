@@ -17,7 +17,7 @@ except :
 from frappe import ValidationError, _, scrub, throw
 from frappe.utils import cint, comma_or, flt, get_link_to_form, getdate, nowdate
 from functools import reduce
-import pandas as pd
+# import pandas as pd
 
 
 DOMAINS = frappe.get_active_domains()
@@ -371,14 +371,15 @@ def add_year_date(trans_date):
 
 @frappe.whitelist()
 def add_template_terms(file):
-	pat = file.split('/')
-	usecols = ['template','descrption','portion','due_date','month']#,'Serial No','Batch No'
-	# data = pd.read_csv(frappe.get_site_path('private', 'files', str(pat[-1])), usecols=usecols)
-	#!---
-	data = pd.read_excel(frappe.get_site_path('private', 'files', str(pat[-1])) ,sheet_name = 0,engine='openpyxl',usecols=usecols)
-	data = data.fillna('')
-	# print('\n\n\n=data=>',data,'\n\n\n')
-	return get_data(data) 
+	pass
+	# pat = file.split('/')
+	# usecols = ['template','descrption','portion','due_date','month']#,'Serial No','Batch No'
+	# # data = pd.read_csv(frappe.get_site_path('private', 'files', str(pat[-1])), usecols=usecols)
+	# #!---
+	# data = pd.read_excel(frappe.get_site_path('private', 'files', str(pat[-1])) ,sheet_name = 0,engine='openpyxl',usecols=usecols)
+	# data = data.fillna('')
+	# # print('\n\n\n=data=>',data,'\n\n\n')
+	# return get_data(data) 
 
 
 def get_data(data):
