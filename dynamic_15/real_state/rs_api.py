@@ -19,6 +19,7 @@ from frappe.utils import cint, comma_or, flt, get_link_to_form, getdate, nowdate
 from functools import reduce
 # import pandas as pd
 
+from erpnext.accounts.doctype.pos_invoice.pos_invoice import get_stock_availability
 
 DOMAINS = frappe.get_active_domains()
 
