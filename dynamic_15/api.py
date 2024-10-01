@@ -333,18 +333,18 @@ def get_advance_entries_quotation(doc_name, include_unallocated=True):
 
 	order_list = []
 
-		journal_entries = get_advance_journal_entries(
-			party_type, party, party_account, amount_field, order_doctype, order_list, include_unallocated
-		)
-		print("journal_entries = ",journal_entries)
+	journal_entries = get_advance_journal_entries(
+		party_type, party, party_account, amount_field, order_doctype, order_list, include_unallocated
+	)
+	print("journal_entries = ",journal_entries)
 
-		payment_entries = get_advance_payment_entries(
-			party_type, party, party_account, order_doctype, order_list, include_unallocated
-		)
-		print("payment_entries = ",payment_entries)
+	payment_entries = get_advance_payment_entries(
+		party_type, party, party_account, order_doctype, order_list, include_unallocated
+	)
+	print("payment_entries = ",payment_entries)
 
-		res = journal_entries + payment_entries
+	res = journal_entries + payment_entries
 
-		return res
+	return res
 
 
