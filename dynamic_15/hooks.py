@@ -40,7 +40,7 @@ website_context = {
 doctype_js = {
     "Stock Entry" : "public/js/stock_entry.js",
     "Payment Entry" : "public/js/payment_entry.js",
-    "Sales Order" : "public/js/sales_order.js",
+    # "Sales Order" : "public/js/sales_order.js",
     "Sales Invoice" : "public/js/sales_invoice.js",
     "Purchase Order" : "public/js/purchase_order.js",
     "Purchase Invoice" : "public/js/purchase_invoice.js",
