@@ -51,7 +51,7 @@ frappe.ui.form.on("Sales Order", {
             if (r.message && r.message.length) {
               if ( r.message.includes("Dynamic Accounts")) {
                 return frappe.call({
-                  method: "dynamic.ifi.api.get_advanced_so_ifi",
+                  method: "dynamic.dynamic_accounts.api.get_advanced_so_ifi",
                   args:{
                     doc_name: frm.doc.name,
                   },

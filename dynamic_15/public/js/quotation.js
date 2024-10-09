@@ -39,13 +39,13 @@ frappe.ui.form.on("Quotation", {
     get_advancess:function(frm){
       if(!frm.is_return) {
               frappe.call({
-          method: "dynamic.api.get_active_domains",
+          method: "dynamic_15.api.get_active_domains",
           callback: function (r) {
             if (r.message && r.message.length) {
               if (r.message.includes("Dynamic Accounts")) {
                 console.log("Hi");
                 return frappe.call({
-                  method: "dynamic.ifi.api.get_advance_entries_quotation",//get_advanced_so_ifi
+                  method: "dynamic_15.dynamic_accounts.api.get_advance_entries_quotation",
                   args:{
                       doc_name: frm.doc.name,
                   },
