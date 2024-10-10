@@ -45,7 +45,7 @@ frappe.ui.form.on("Quotation", {
               if (r.message.includes("Dynamic Accounts")) {
                 console.log("Hi");
                 return frappe.call({
-                  method: "dynamic_15.dynamic_accounts.api.get_advance_entries_quotation",
+                  method: "dynamic_15.api.get_advance_entries_quotation",
                   args:{
                       doc_name: frm.doc.name,
                   },
