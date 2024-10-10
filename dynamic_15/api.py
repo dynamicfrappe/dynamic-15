@@ -292,6 +292,8 @@ def get_advance_entries(self, include_unallocated=True):
 
 	# print('\n\n-->party_type',party_account)
 	# order_list = list(set(d.get(order_field) for d in self.get("items") if d.get(order_field)))
+	if isinstance(party_account, str):
+		party_account = [party_account]
 	order_list = [self.name, ]
 	journal_entries = get_advance_journal_entries(
 		party_type, party, party_account, amount_field, order_doctype, order_list, include_unallocated
@@ -332,6 +334,8 @@ def get_advance_entries_quotation(doc_name, include_unallocated=True):
 		order_doctype = "Purchase Order"
 
 	order_list = []
+	if isinstance(party_account, str):
+		party_account = [party_account]
 
 	journal_entries = get_advance_journal_entries(
 		party_type, party, party_account, amount_field, order_doctype, order_list, include_unallocated
