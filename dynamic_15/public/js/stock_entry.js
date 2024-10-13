@@ -1,10 +1,8 @@
 frappe.ui.form.on('Stock Entry', {
-	onload: function(frm) {
 
-    },
 });
 
-frappe.ui.form.on('Stock Entry Detail', {
+frappe.ui.form.on('Stock Entry Detail', { 
     item_code: function(frm , cdt , cdn){
         calculate_weight_rate(frm, cdt, cdn);
     },
@@ -20,8 +18,44 @@ frappe.ui.form.on('Stock Entry Detail', {
     calculate_weight: function(frm, cdt, cdn) {
         calculate_weight(frm, cdt, cdn);
     },
-});
+    is_finished_item: function(frm, cdt, cdn) {
+        frappe.call({
+            method: "dynamic_15.api.get_active_domains",
+            callback: function (r) {
+                if (r.message && r.message.length) {
+                    if (r.message.includes("Tebian")) {
+                        let row = locals[cdt][cdn];
+                        if (row.is_finished_item){
+                            frappe.model.set_value(cdt, cdn, 'has_weight', 1);
+                        }
+                        else{
+                            frappe.model.set_value(cdt, cdn, 'has_weight', 0);
+                        }
+                    }
+                }
+            }
+        })
+    },
+    is_scrap_item: function(frm, cdt, cdn) {
+        frappe.call({
+            method: "dynamic_15.api.get_active_domains",
+            callback: function (r) {
+                if (r.message && r.message.length) {
+                    if (r.message.includes("Tebian")) {
+                        let row = locals[cdt][cdn];
+                        if (row.is_scrap_item){
+                            frappe.model.set_value(cdt, cdn, 'has_weight', 1);
+                        }
+                        else{
+                            frappe.model.set_value(cdt, cdn, 'has_weight', 0);
+                        }
+                    }
+                }
+            }
+        })
 
+    },
+});
 
 function calculate_weight_rate(frm, cdt, cdn) {
     let row = locals[cdt][cdn];

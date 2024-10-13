@@ -39,6 +39,7 @@ website_context = {
 # include js in doctype views
 doctype_js = {
     "Stock Entry" : "public/js/stock_entry.js",
+    "Material Request" : "public/js/material_request.js",
     "Payment Entry" : "public/js/payment_entry.js",
     # "Sales Order" : "public/js/sales_order.js",
     "Sales Invoice" : "public/js/sales_invoice.js",
@@ -162,7 +163,6 @@ doc_events = {
         "on_submit": "dynamic_15.api.submit_journal_entry",
     },
     "Item": {
-        "before_save": "dynamic_15.api.save_item",
         "Item":"dynamic_15.api.create_item_barcode",
     },
     "Sales Order": {
@@ -182,7 +182,8 @@ doc_events = {
     },
     "Stock Entry": {
         "validate": [
-            "dynamic_15.api.validate_stock_entry",  
+            "dynamic_15.api.validate_stock_entry", 
+            "dynamic_15.api.check_calculate_weight",  
         ],
     },
     "Task": {

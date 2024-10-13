@@ -27,14 +27,6 @@ def submit_journal_entry(doc, fun=""):
 		submit_journal_entry_cheques(doc)
 
 @frappe.whitelist()
-def save_item(doc, *args, **kwargs):
-	if "UOM" in DOMAINS:
-		for item in doc.uoms:
-			if item.idx == 1:
-				item.total = doc.length * doc.width * doc.height
-
-
-@frappe.whitelist()
 def update_paymentrntry(doc, *args, **kwargs):
 	if "Cheques" in DOMAINS:
 		# validate party account with part type
@@ -351,4 +343,55 @@ def get_advance_entries_quotation(doc_name, include_unallocated=True):
 
 	return res
 
+@frappe.whitelist()
+def check_calculate_weight(doc, *args, **kwargs):
+	if "Tebian" in DOMAINS:
+		sum = 0
+		for item in doc.items :
+			if item.item_code :
+				calculate_weight = frappe.db.get_value(
+							"Item", {"name": item.item_code}, "calculate_weight")
+				item.calculate_weight = calculate_weight
+				if item.calculate_weight :
+					set_total_weight(item)
 
+				if item.is_finished_item or item.is_scrap_item :
+					item.has_weight = 1
+				if item.is_finished_item == 0 :
+					sum += item.total_weight
+				if item.has_weight :
+					item.total_weight = sum
+					item.weight_rate = sum / item.qty
+
+def set_total_weight(item):
+	if item.stock_uom == item.uom :
+		item.total_weight = item.weight_per_unit * item.qty 
+	else :
+		item.total_weight = item.weight_per_unit * item.transfer_qty 
+
+
+
+def set_total_weight(item):
+	if item.stock_uom == item.uom :
+		item.total_weight = item.weight_per_unit * item.qty 
+	else :
+		item.total_weight = item.weight_per_unit * item.transfer_qty 
+
+
+@frappe.whitelist()
+def create_stock_entry(source):
+	material_request = frappe.get_doc("Material Request" , source)
+	stock_entry = frappe.new_doc("Stock Entry")
+	stock_entry.stock_entry_type = material_request.material_request_type
+	# stock_entry.items = material_request.items
+	for item in material_request.items :
+		stock_entry.append("items" , {
+			"t_warehouse" :  material_request.set_warehouse , 
+			"item_code" : item.item_code ,
+			"item_name" : item.item_name,
+			"description" : item.description ,
+			"uom" : item.uom ,
+			"basic_rate" : item.rate ,
+			"qty" : item.qty ,
+		})
+	return stock_entry
