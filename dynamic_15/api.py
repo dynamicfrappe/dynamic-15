@@ -363,6 +363,40 @@ def check_calculate_weight(doc, *args, **kwargs):
 					item.total_weight = sum
 					item.weight_rate = sum / item.qty
 
+@frappe.whitelist()
+def validat_stock_qty(doc, *args, **kwargs):
+	if doc.stock_entry_type == "Cuting" :
+		diff = 0
+		scrap =''
+		conversion_factor = 0.0
+		basic_rate = 0.0
+		for item in doc.items : 
+			if item.idx == 1:
+				basic_rate = item.basic_rate
+				scrap = item.scrap_item 
+			item.basic_rate = basic_rate
+			diff = abs(diff - item.transfer_qty)
+		if diff !=0:
+			item = frappe.get_doc("Item" , scrap)
+			for uom in item.uoms :
+				if uom.uom == item.stock_uom :
+					conversion_factor = uom.conversion_factor
+			doc.append("items" , {
+				"item_code" : scrap ,
+				"qty" : diff ,
+				"uom" : item.stock_uom ,
+				"transfer_qty" : conversion_factor ,
+				"stock_uom" : item.stock_uom ,
+				"conversion_factor" : conversion_factor ,
+				"is_finished_item" : 1 ,
+				"basic_rate" : basic_rate ,
+			})
+			frappe.db.commit()
+		
+
+
+	
+
 def set_total_weight(item):
 	if item.stock_uom == item.uom :
 		item.total_weight = item.weight_per_unit * item.qty 

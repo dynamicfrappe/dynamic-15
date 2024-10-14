@@ -184,7 +184,12 @@ doc_events = {
         "validate": [
             "dynamic_15.api.validate_stock_entry", 
             "dynamic_15.api.check_calculate_weight",  
+            # "dynamic_15.api.validat_stock_qty",  
         ],
+        "before_insert" :[
+            "dynamic_15.api.validat_stock_qty",  
+
+        ]
     },
     "Task": {
         "before_save":[
