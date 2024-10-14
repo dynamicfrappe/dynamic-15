@@ -371,7 +371,7 @@ def validat_stock_qty(doc, *args, **kwargs):
 		conversion_factor = 0.0
 		basic_rate = 0.0
 		for item in doc.items : 
-			if item.idx == 1:
+			if item.scrap_item:
 				basic_rate = item.basic_rate
 				scrap = item.scrap_item 
 			item.basic_rate = basic_rate
@@ -427,5 +427,6 @@ def create_stock_entry(source):
 			"uom" : item.uom ,
 			"basic_rate" : item.rate ,
 			"qty" : item.qty ,
+			"stock_uom" : item.stock_uom
 		})
 	return stock_entry
