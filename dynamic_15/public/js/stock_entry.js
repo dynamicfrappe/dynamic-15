@@ -1,5 +1,12 @@
 frappe.ui.form.on('Stock Entry', {
+    refresh: function(frm) {
+        if(frm.doc.stock_entry_type == "Cuting"){
+            frm.set_value("stock_entry_type", "");
+            frm.refresh_field("stock_entry_type")
+            frm.set_value("stock_entry_type", "Cuting");
 
+        }
+    },
 });
 
 frappe.ui.form.on('Stock Entry Detail', { 
@@ -100,4 +107,4 @@ function calculate_weight(frm, cdt, cdn){
         frappe.model.set_value(cdt, cdn, 'total_weight', temp);
     }
     
-}
+}    

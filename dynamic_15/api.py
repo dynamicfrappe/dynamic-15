@@ -374,8 +374,7 @@ def validat_stock_qty(doc, *args, **kwargs):
 			if item.scrap_item:
 				basic_rate = item.basic_rate
 				scrap = item.scrap_item 
-			item.basic_rate = basic_rate
-			diff = abs(diff - item.transfer_qty)
+			diff = abs(abs(diff) - item.transfer_qty)
 		if diff !=0:
 			item = frappe.get_doc("Item" , scrap)
 			for uom in item.uoms :
@@ -391,7 +390,8 @@ def validat_stock_qty(doc, *args, **kwargs):
 				"is_finished_item" : 1 ,
 				"basic_rate" : basic_rate ,
 			})
-			frappe.db.commit()
+		for item in doc.items : 
+			item.basic_rate = basic_rate
 		
 
 
@@ -417,7 +417,7 @@ def create_stock_entry(source):
 	material_request = frappe.get_doc("Material Request" , source)
 	stock_entry = frappe.new_doc("Stock Entry")
 	stock_entry.stock_entry_type = material_request.material_request_type
-	# stock_entry.items = material_request.items
+	stock_entry.material_request = material_request.name
 	for item in material_request.items :
 		stock_entry.append("items" , {
 			"t_warehouse" :  material_request.set_warehouse , 
@@ -427,6 +427,8 @@ def create_stock_entry(source):
 			"uom" : item.uom ,
 			"basic_rate" : item.rate ,
 			"qty" : item.qty ,
-			"stock_uom" : item.stock_uom
+			"stock_uom" : item.stock_uom ,
+			"is_finished_item" : 1,
+			"has_weight" : 1 ,
 		})
 	return stock_entry
