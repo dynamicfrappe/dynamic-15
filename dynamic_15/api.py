@@ -430,5 +430,6 @@ def create_stock_entry(source):
 			"stock_uom" : item.stock_uom ,
 			"is_finished_item" : 1,
 			"has_weight" : 1 ,
+			"conversion_factor" : item.conversion_factor
 		})
 	return stock_entry
