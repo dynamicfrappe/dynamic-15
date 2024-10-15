@@ -417,6 +417,7 @@ def create_stock_entry(source):
 	material_request = frappe.get_doc("Material Request" , source)
 	stock_entry = frappe.new_doc("Stock Entry")
 	stock_entry.stock_entry_type = material_request.material_request_type
+	stock_entry.to_warehouse = material_request.set_warehouse
 	stock_entry.material_request = material_request.name
 	for item in material_request.items :
 		stock_entry.append("items" , {
@@ -428,6 +429,7 @@ def create_stock_entry(source):
 			"basic_rate" : item.rate ,
 			"qty" : item.qty ,
 			"stock_uom" : item.stock_uom ,
+			"transfer_qty" : item.stock_qty,
 			"is_finished_item" : 1,
 			"has_weight" : 1 ,
 			"conversion_factor" : item.conversion_factor
