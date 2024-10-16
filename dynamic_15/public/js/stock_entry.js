@@ -1,11 +1,21 @@
 frappe.ui.form.on('Stock Entry', {
     refresh: function(frm) {
-        if(frm.doc.stock_entry_type == "Cuting" && frm.doc.is_local == 1){
-            frm.set_value("stock_entry_type", "");
-            frm.refresh_field("stock_entry_type")
-            frm.set_value("stock_entry_type", "Cuting");
+        frappe.call({
+            method: "dynamic_15.api.get_active_domains",
+            callback: function (r) {
+                if (r.message && r.message.length) {
+                    if (r.message.includes("Tebian")) {
+                        if(frm.doc.stock_entry_type == "Cuting" && frm.doc.is_local == 1){
+                            frm.set_value("stock_entry_type", "");
+                            frm.refresh_field("stock_entry_type")
+                            frm.set_value("stock_entry_type", "Cuting");
+                
+                        }
+                    }
+                }
+            }
+        })
 
-        }
     },
 });
 
