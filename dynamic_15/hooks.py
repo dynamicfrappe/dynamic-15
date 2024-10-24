@@ -305,7 +305,7 @@ domains = {
     "Item Barcode":"dynamic_15.domains.item_barcode",
     "POS Subscription":"dynamic_15.domains.pos_subscription",
     "United Enginering" : "dynamic_15.domains.united_engineering",
-    "Real State": "dynamic_15.domains.real_state",
+    # "Real State": "dynamic_15.domains.real_state",
 }
 
 # auth_hooks = [
