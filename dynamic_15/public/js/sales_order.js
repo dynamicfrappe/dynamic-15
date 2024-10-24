@@ -10,7 +10,7 @@ frappe.ui.form.on("Sales Order", {
 
     refresh: function (frm) {  
      
-      frm.events.add_cheque_button(frm);
+      // frm.events.add_cheque_button(frm);
 
     },
     
