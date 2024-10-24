@@ -314,32 +314,32 @@ frappe.ui.form.on("Sales Order", {
   
   });
   
-  erpnext.selling.SalesOrderController = class SalesOrderController extends erpnext.selling.SellingController {
+  // erpnext.selling.SalesOrderController = class SalesOrderController extends erpnext.selling.SellingController {
     
-     refresh(doc, dt, dn)  {
-      var me = this;
-      this._super(doc);
-        if(doc.status !== 'Closed') {
-          if(doc.status !== 'On Hold') {
+  //    refresh(doc, dt, dn)  {
+  //     var me = this;
+  //     this._super(doc);
+  //       if(doc.status !== 'Closed') {
+  //         if(doc.status !== 'On Hold') {
             
-            frappe.call({
-              method: "dynamic_15.api.get_active_domains",
-              callback: function (r) {
-                if (r.message && r.message.length) {
+  //           frappe.call({
+  //             method: "dynamic_15.api.get_active_domains",
+  //             callback: function (r) {
+  //               if (r.message && r.message.length) {
                   
-                  if (r.message.includes("Real State")){
-                    // console.log('domains real state')
-                    cur_frm.cscript['get_method_for_payment'] = create_payment_for_real_state
-                  }
-                }
-              }
-            })
+  //                 if (r.message.includes("Real State")){
+  //                   // console.log('domains real state')
+  //                   cur_frm.cscript['get_method_for_payment'] = create_payment_for_real_state
+  //                 }
+  //               }
+  //             }
+  //           })
   
-          }
-        }
-    }
+  //         }
+  //       }
+  //   }
     
-  };
+  // };
   
   var create_payment_for_real_state = function(){
     var method = "dynamic_15.real_state.rs_api.get_payment_entry";
