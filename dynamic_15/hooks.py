@@ -41,7 +41,7 @@ doctype_js = {
     "Stock Entry" : "public/js/stock_entry.js",
     "Material Request" : "public/js/material_request.js",
     "Payment Entry" : "public/js/payment_entry.js",
-    # "Sales Order" : "public/js/sales_order.js",
+    "Sales Order" : "public/js/sales_order.js",
     "Sales Invoice" : "public/js/sales_invoice.js",
     "Purchase Order" : "public/js/purchase_order.js",
     "Purchase Invoice" : "public/js/purchase_invoice.js",
@@ -305,7 +305,7 @@ domains = {
     "Item Barcode":"dynamic_15.domains.item_barcode",
     "POS Subscription":"dynamic_15.domains.pos_subscription",
     "United Enginering" : "dynamic_15.domains.united_engineering",
-    # "Real State": "dynamic_15.domains.real_state",
+    "Real State": "dynamic_15.domains.real_state",
 }
 
 # auth_hooks = [

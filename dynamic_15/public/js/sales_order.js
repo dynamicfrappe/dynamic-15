@@ -5,7 +5,7 @@ frappe.ui.form.on("Sales Order", {
       frm.custom_make_buttons = {
         "Cheque": "Cheque",
       };
-      frm.events.setup_doc_event(frm)
+      // frm.events.setup_doc_event(frm)
     },
 
     refresh: function (frm) {  
@@ -18,7 +18,7 @@ frappe.ui.form.on("Sales Order", {
     },
     
     transaction_date:function(frm){
-      frm.events.setup_doc_event(frm)
+      // frm.events.setup_doc_event(frm)
     },
     
     setup_doc_event:function(frm){
